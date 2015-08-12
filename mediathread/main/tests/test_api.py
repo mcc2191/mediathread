@@ -1,15 +1,35 @@
-# pylint: disable-msg=R0904
-# pylint: disable-msg=E1103
 from django.contrib.auth.models import User
-from django.test.testcases import TestCase
+from django.test import TestCase
 
 from courseaffils.models import Course
 from mediathread.api import UserResource
-from mediathread.factories import (UserFactory, GroupFactory, CourseFactory)
+from mediathread.factories import (
+    UserFactory, UserProfileFactory, GroupFactory, CourseFactory
+)
+
+
+class APIKeyTest(TestCase):
+    def setUp(self):
+        self.up = UserProfileFactory()
+
+    def test_flickr_key_logged_in(self):
+        with self.settings(DJANGOSHERD_FLICKR_APIKEY='flickr_key'):
+            self.assertTrue(
+                self.client.login(username=self.up.user.username,
+                                  password='test'))
+            r = self.client.get('/api/apikeys/')
+            self.assertEqual(r.status_code, 200)
+
+    def test_youtube_key_logged_in(self):
+        with self.settings(DJANGOSHERD_YOUTUBE_APIKEY='youtube_key'):
+            self.assertTrue(
+                self.client.login(username=self.up.user.username,
+                                  password='test'))
+            r = self.client.get('/api/apikeys/')
+            self.assertEqual(r.status_code, 200)
 
 
 class UserApiTest(TestCase):
-
     def get_credentials(self):
         return None
 

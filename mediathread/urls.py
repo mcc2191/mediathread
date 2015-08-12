@@ -23,10 +23,12 @@ from mediathread.main.views import (MigrateCourseView, MigrateMaterialsView,
                                     CourseManageSourcesView, IsLoggedInView)
 from mediathread.projects.views import (
     ProjectCollectionView, ProjectDetailView, ProjectItemView)
+from mediathread.main.resources import ApiKeysResource
 from mediathread.taxonomy.api import TermResource, VocabularyResource
 
 
 tastypie_api = Api('')
+tastypie_api.register(ApiKeysResource())
 tastypie_api.register(TermResource())
 tastypie_api.register(VocabularyResource())
 
