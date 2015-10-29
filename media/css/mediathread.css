@@ -1,16 +1,8 @@
 /* ########## Standard elements ########## */
-html,body {
-	height: 100%;
-	font-size: 1em;
-}
 
 body
 {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background-color: #fff;
-    font: .875em/1.125em 'helvetica neue', helvetica, arial, sans-serif !important;
+    font-family: 'helvetica neue', helvetica, arial, sans-serif;
     color: #383838;
     width: 100% auto;
 }
