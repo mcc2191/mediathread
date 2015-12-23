@@ -1,5 +1,6 @@
-from lettuce.django import django_url
-from lettuce import world, step
+from urlparse import urljoin
+from aloe import world, step
+from aloe_django import django_url
 from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import NoSuchElementException
 
@@ -7,7 +8,7 @@ from selenium.common.exceptions import NoSuchElementException
 @step(u'video upload is enabled')
 def video_upload_is_enabled(step):
     if world.using_selenium:
-        world.browser.get(django_url("/dashboard/sources/"))
+        world.browser.get(urljoin(django_url(step), "/dashboard/sources/"))
         try:
             elt = world.browser.find_element_by_id("mediathread-video-upload")
             if elt:

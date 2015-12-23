@@ -1,7 +1,7 @@
 Feature: Composition
 
     Scenario: composition.feature 1. Instructor creates composition
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given there are no projects
         
@@ -55,10 +55,10 @@ Feature: Composition
         Given the home workspace is loaded
         Then there is a draft "Composition: Scenario 1" project by Instructor One
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: composition.feature 2. Student creates composition
-        Using selenium
+        Given Using selenium
         Given I am test_student_one in Sample Course
         Given there are no projects
         
@@ -113,10 +113,10 @@ Feature: Composition
         Given the home workspace is loaded
         Then there is a draft "Composition: Scenario 2" project by Student One
         
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario Outline: composition.feature 3. Composition Visibility - Student Viewing Instructor Created Information
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
                 
         # Create a project from the home page
@@ -144,7 +144,7 @@ Feature: Composition
         Then the instructor panel has <info_count> projects named "Composition <title>: Scenario 3"
         Then the composition panel has <composition_count> projects named "Composition <title>: Scenario 3"
         
-        Finished using Selenium
+        Then Finished using Selenium
              
       Examples:
         | title   | visibility                                                        | status             | info_count | composition_count |
@@ -152,7 +152,7 @@ Feature: Composition
         | Public  | Whole Class - all class members can view                          | Published to Class | 1          | 0                 |
                  
     Scenario Outline: composition.feature 4. Homepage Composition Visibility - Student/Instructor Viewing Another Student's Compositions
-        Using selenium
+        Given Using selenium
         Given I am test_student_one in Sample Course
                 
         # Create a project from the home page
@@ -187,7 +187,7 @@ Feature: Composition
         Then the owner is "Student One" in the Composition column
         Then the composition panel has <count> projects named "<title>"
         
-        Finished using Selenium
+        Then Finished using Selenium
              
       Examples:
         | title   | visibility                                      | status             | count |

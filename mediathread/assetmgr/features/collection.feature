@@ -1,7 +1,7 @@
 Feature: Collection View    
     
     Scenario: collection.feature 1. Collection - Basic item functionality
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         When I click the "View Full Collection" link
@@ -25,10 +25,10 @@ Feature: Collection View
         When I click the "MAAP Award Reception" link
         Then I am at the Mediathread Collection page
                 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: collection.feature 2. Collection - Viewing Items & Selections
-        Using selenium
+        Given Using selenium
         
         Given I am test_instructor in Sample Course
         Given the item visibility is set to "Yes"
@@ -81,10 +81,10 @@ Feature: Collection View
         Then the Collection panel has a "MAAP Award Reception" item
         And the "MAAP Award Reception" item has 3 selections, 1 by me        
         
-        Finished using Selenium
+        Then Finished using Selenium
         
     Scenario: collection.feature 3. Collection - Viewing Items & Selections
-        Using selenium
+        Given Using selenium
         
         Given I am test_instructor in Sample Course
         Given the selection visibility is set to "Yes"
@@ -136,10 +136,10 @@ Feature: Collection View
         Then the Collection panel has a "MAAP Award Reception" item
         And the "MAAP Award Reception" item has 3 selections, 1 by me        
         
-        Finished using Selenium        
+        Then Finished using Selenium        
         
     Scenario: collection.feature 4. Collection - Viewing Items & Selections
-        Using selenium
+        Given Using selenium
         
         Given I am test_instructor in Sample Course
         Given the selection visibility is set to "Yes"
@@ -191,10 +191,10 @@ Feature: Collection View
         Then the Collection panel has a "MAAP Award Reception" item
         And the "MAAP Award Reception" item has 3 selections, 1 by me        
         
-        Finished using Selenium        
+        Then Finished using Selenium        
         
     Scenario: collection.feature 5. Collection - Viewing Items & Selections
-        Using selenium
+        Given Using selenium
         
         Given I am test_instructor in Sample Course
         Given the selection visibility is set to "No"
@@ -246,10 +246,10 @@ Feature: Collection View
         Then the Collection panel has a "MAAP Award Reception" item
         And the "MAAP Award Reception" item has 3 selections, 1 by me        
         
-        Finished using Selenium
+        Then Finished using Selenium
         
    Scenario: collection.feature 6. Collection - Limited Selection Visibility 
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given the selection visibility is set to "No"
 
@@ -317,10 +317,10 @@ Feature: Collection View
         And I cannot filter by "student_two_selection (1)" in the asset-workspace column
         And I can filter by "student_two_item (1)" in the asset-workspace column
                 
-        Finished using Selenium
+        Then Finished using Selenium
     
     Scenario: collection.feature 7. Collection - Filter by tag
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         
         When I click the "View Full Collection" link
@@ -349,4 +349,4 @@ Feature: Collection View
         And the Collection panel has no "The Armory - Home to CCNMTL'S CUMC…" item
         And the Collection panel has a "Mediathread: Introduction" item
 
-        Finished using Selenium
+        Then Finished using Selenium

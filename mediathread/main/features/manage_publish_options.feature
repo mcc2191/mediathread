@@ -1,7 +1,7 @@
 Feature: Manage Sources
 
     Scenario: manage_publish_options.feature 1. Publish options - default is off
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         
         When I open the manage menu
@@ -11,10 +11,10 @@ Feature: Manage Sources
      
         Then publish to world is disabled
         
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: manage_publish_options.feature 2. Publish options set to Yes
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given publish to world is enabled
         
@@ -25,10 +25,10 @@ Feature: Manage Sources
      
         Then publish to world is enabled
         
-        Finished using Selenium
+        Then Finished using Selenium
         
     Scenario: manage_publish_options.feature 3. Publish options set to No
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given publish to world is disabled
         
@@ -39,6 +39,6 @@ Feature: Manage Sources
              
         Then publish to world is disabled
         
-        Finished using Selenium        
+        Then Finished using Selenium        
     
   

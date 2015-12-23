@@ -1,7 +1,7 @@
 Feature: Public Compositions
 
     Scenario Outline: publishtoworld.composition.feature 1. Instructor creates public to world composition - verify visibility 
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given there are no projects
         Given publish to world is enabled
@@ -56,7 +56,7 @@ Feature: Public Compositions
             When I click the "<item_name>" citation in the Composition panel
             Then the Composition panel media window displays "<item_name>"
         
-        Finished using Selenium
+        Then Finished using Selenium
 
       Examples:
         | project_name                    | item_name             |

@@ -2,7 +2,7 @@ Feature: Direct Asset Access
     Verify that students and instructors cannot see each other's assets
 
     Scenario Outline: asset_access.feature 1. Sample Course members cannot see Alternate Course assets 
-        Using selenium
+        Given Using selenium
         Given I am <user_name> in Sample Course
 
         # Direct Asset access view + json
@@ -47,7 +47,7 @@ Feature: Direct Asset Access
         When I access the url "/asset/4/annotations/13/"
         Then I see "Page not found"
     
-        Finished using Selenium
+        Then Finished using Selenium
         
     Examples:
         | user_name           |
@@ -55,7 +55,7 @@ Feature: Direct Asset Access
         | test_student_one    |
         
     Scenario Outline: asset_access.feature 2. Alternate Course members cannot see Sample Course assets 
-        Using selenium
+        Given Using selenium
         Given I am <user_name> in Alternate Course
         
         # Asset from the Alternate Course
@@ -96,7 +96,7 @@ Feature: Direct Asset Access
         When I access the url "/asset/1/annotations/3/"
         Then I see "Page not found"
     
-        Finished using Selenium
+        Then Finished using Selenium
         
     Examples:
         | user_name           |
@@ -104,7 +104,7 @@ Feature: Direct Asset Access
         | test_student_alt    |
         
     Scenario: asset_access.feature 3. Members of both classes can see all assets 
-        Using selenium
+        Given Using selenium
         
         Given I am not logged in
         When I access the url "/"
@@ -140,10 +140,10 @@ Feature: Direct Asset Access
         When I access the url "/asset/json/4/"
         Then I see "Page not found"
         
-        Finished using Selenium
+        Then Finished using Selenium
         
     Scenario: asset_access.feature 4. If logged into the wrong class, user is prompted to switch classes 
-        Using selenium 
+        Given Using selenium 
         
         Given I am not logged in
         When I access the url "/"
@@ -176,4 +176,4 @@ Feature: Direct Asset Access
         Then I am at the Mediathread Collection page
         Then I see "Design Research"
         
-        Finished using Selenium
+        Then Finished using Selenium

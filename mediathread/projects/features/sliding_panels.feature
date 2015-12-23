@@ -1,7 +1,7 @@
 Feature: Sliding Panels
         
     Scenario Outline: 1. Composition At Various Resolutions
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given my browser resolution is <width> x <height>
         
@@ -25,7 +25,7 @@ Feature: Sliding Panels
         Then I see a Save Changes dialog
         Then I save the changes
         
-        Finished using Selenium
+        Then Finished using Selenium
         
       Examples:
         | width | height | subpanel_state |
@@ -35,7 +35,7 @@ Feature: Sliding Panels
         | 1440  | 900    | open           |
         
     Scenario Outline: 2. Assignment At Various Resolutions
-        Using selenium
+        Given Using selenium
         Given there is a sample assignment
         Given I am test_student_one in Sample Course
         Given my browser resolution is <width> x <height>
@@ -73,7 +73,7 @@ Feature: Sliding Panels
             Then I confirm the action   
             Then there is not a "Sliding Panel: Scenario 2 <width> x <height>" link
         
-        Finished using Selenium
+        Then Finished using Selenium
         
       Examples:
         | width | height | assignment_subpanel_state | assignment_panel_state | composition_subpanel_state |

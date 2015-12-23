@@ -1,7 +1,7 @@
 Feature: QuickEdit
 
     Scenario: quickedit.feature 1. Instructor edits the item metadata
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given there are no projects
 
@@ -41,10 +41,10 @@ Feature: QuickEdit
         And I see "Here are my notes"
         And there is an "ghi" link
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: quickedit.feature 2. Instructor creates a selection
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given there are no projects
 
@@ -91,10 +91,10 @@ Feature: QuickEdit
         And I see "Here are my new notes"
         And there is an "abc" link
         
-        Finished using Selenium
+        Then Finished using Selenium
         
     Scenario: quickedit.feature 3. Instructor edits a selection
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given there are no projects
 
@@ -141,7 +141,7 @@ Feature: QuickEdit
         And I see "Here are my selection notes"
         And there is an "def" link
         
-        Finished using Selenium        
+        Then Finished using Selenium        
 
         
         

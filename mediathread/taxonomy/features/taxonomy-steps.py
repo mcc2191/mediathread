@@ -1,4 +1,6 @@
-from lettuce import world, step, django
+from urlparse import urljoin
+from aloe import world, step
+from aloe_django import django_url
 from selenium.webdriver.support.expected_conditions import \
     invisibility_of_element_located, visibility_of_element_located
 import selenium.webdriver.support.ui as ui
@@ -181,7 +183,7 @@ def there_is_no_name_term(step, name):
 
 @step(u'specify the onomy url')
 def specify_the_onomy_url(step):
-    url = django.django_url('/media/onomy/test.json')
+    url = urljoin(django_url(step), '/media/onomy/test.json')
     elt = world.browser.find_element_by_id('onomy_url')
     elt.send_keys(url)
 
@@ -195,14 +197,14 @@ def confirm_the_onomy_import(step):
 
 @step(u'specify the incorrect onomy url')
 def specify_the_incorrect_onomy_url(step):
-    url = django.django_url('incorrect')
+    url = urljoin(django_url(step), 'incorrect')
     elt = world.browser.find_element_by_id('onomy_url')
     elt.send_keys(url)
 
 
 @step(u'specify the refresh onomy url')
 def specify_the_refresh_onomy_url(step):
-    url = django.django_url('/media/onomy/reimport_test.json')
+    url = urljoin(django_url(step), '/media/onomy/reimport_test.json')
     elt = world.browser.find_element_by_id('onomy_url')
     elt.send_keys(',')
     elt.send_keys(url)

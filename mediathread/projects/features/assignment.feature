@@ -1,7 +1,7 @@
 Feature: Assignment
 
     Scenario: assignment.feature 1. Instructor creates assignment
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given there are no projects
         
@@ -67,10 +67,10 @@ Feature: Assignment
         And the Assignment panel does not have a Respond To Assignment button
         And the Assignment panel does not have a Responses (1) button
 
-        Finished using Selenium 
+        Then Finished using Selenium 
         
     Scenario: assignment.feature 2. Student creates assignment response
-        Using selenium
+        Given Using selenium
         Given there is a sample assignment
         Given I am test_student_one in Sample Course
         
@@ -115,7 +115,7 @@ Feature: Assignment
         Then there is a submitted to instructor "Sample Assignment Response" reply by Student One
 
     Scenario: assignment.feature 3. Instructor provides response feedback
-        Using selenium
+        Given Using selenium
         Given there is a sample response
         Given I am test_instructor in Sample Course
         
@@ -170,10 +170,10 @@ Feature: Assignment
         And the Assignment Panel has a Respond to Assignment button
         And the Assignment Panel does not have a Class Responses (1) button
 
-        Finished using Selenium
+        Then Finished using Selenium
         
     Scenario Outline: assignment.feature 4. Assignment Response - visibility rules        
-        Using selenium
+        Given Using selenium
         Given there is a sample assignment
         Give I am test_student_one in Sample Course
 
@@ -215,7 +215,7 @@ Feature: Assignment
         Then I confirm the action
         Then there is not a "Sample Assignment Response" link
         
-        Finished using Selenium
+        Then Finished using Selenium
                      
       Examples:
         | visibility                                          | status                  | username         | count |
@@ -227,7 +227,7 @@ Feature: Assignment
         | Whole Class - all class members can view            | Published to Class      | test_student_two |   1   |
 
     Scenario: assignment.feature 5. Class Responses link - instructor       
-        Using selenium
+        Given Using selenium
         Given there is a sample response
         Give I am test_instructor in Sample Course
         
@@ -246,10 +246,10 @@ Feature: Assignment
         And there is an open Composition panel
         And the Composition title is "Sample Assignment Response"
         
-        Finished using Selenium
+        Then Finished using Selenium
         
     Scenario: assignment.feature 6. Class Responses link + Response Visibility + Respond - Student Two       
-        Using selenium
+        Given Using selenium
         Given there is a sample response
         
         # By default, the response is "Instructor Only"
@@ -315,10 +315,10 @@ Feature: Assignment
         When I log out
         Then I am at the Login page
         
-        Finished using Selenium
+        Then Finished using Selenium
         
     Scenario: assignment.feature 7. Assignment Response - reset visibility        
-        Using selenium
+        Given Using selenium
         Given there is a sample assignment
         Give I am test_student_one in Sample Course
 
@@ -343,4 +343,4 @@ Feature: Assignment
         When I save the changes
         Then there is a "Published to Class" link
         
-        Finished using Selenium
+        Then Finished using Selenium

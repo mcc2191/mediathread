@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-import errno
-import os
 import time
-from urlparse import urlparse
+from urlparse import urlparse, urljoin
 
 from django.conf import settings
+from django.contrib.auth.models import User, Group
+from django.contrib.contenttypes.models import ContentType
 from django.test import client
-from lettuce import before, after, world, step
-from lettuce import django
+from aloe import before, after, world, step
+from aloe_django import django_url
 from selenium.common.exceptions import NoSuchElementException, \
     StaleElementReferenceException, InvalidElementStateException, \
     TimeoutException
@@ -17,37 +17,32 @@ from selenium.webdriver.support.expected_conditions import (
     visibility_of_element_located, invisibility_of_element_located
 )
 from selenium.webdriver.support.ui import WebDriverWait
-
-from mediathread.projects.models import Project
 import selenium.webdriver.support.ui as ui
-
-
 try:
     from lxml import html
     from selenium import webdriver
     from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 except:
     pass
+from courseaffils.models import Course
+from mediathread.projects.models import Project
+from mediathread.factories import (
+    CollaborationFactory, ProjectFactory, MediathreadTestEnvFactory
+)
+from structuredcollaboration.models import (
+    Collaboration, CollaborationPolicyRecord
+)
 
 
-@before.each_scenario
-def reset_database(variables):
-    world.using_selenium = False
-
-    try:
-        os.remove('lettuce.db')
-        time.sleep(1)
-    except OSError, e:
-        if e.errno != errno.ENOENT:  # errno.ENOENT = no such file or directory
-            raise  # re-raise exception if a different error occurred
-        else:
-            pass  # database doesn't exist yet. that's okay.
-
-    os.system('cp scripts/lettuce_base.db lettuce.db')
+@before.each_example
+def setup_environment(scenario, outline, steps):
+    print('setup_environment')
+    MediathreadTestEnvFactory()
 
 
 @before.all
 def setup_browser():
+    print('setup_browser')
     world.browser = None
     browser = getattr(settings, 'BROWSER', "Headless")
     if browser == 'Firefox':
@@ -74,7 +69,7 @@ def setup_browser():
 
 
 @after.all
-def teardown_browser(total):
+def teardown_browser():
     world.browser.quit()
 
 
@@ -91,9 +86,10 @@ def finished_selenium(step):
 @step(r'I access the url "(.*)"')
 def access_url(step, url):
     if world.using_selenium:
-        world.browser.get(django.django_url(url))
+        world.browser.get(urljoin(django_url(step), url))
     else:
-        response = world.client.get(django.django_url(url))
+        response = world.client.get(
+            urljoin(django_url(step), url))
         world.dom = html.fromstring(response.content)
 
 
@@ -120,8 +116,10 @@ def my_browser_resolution_is_width_x_height(step, width, height):
 @step(u'I am ([^"]*) in ([^"]*)')
 def i_am_username_in_course(step, username, coursename):
     if world.using_selenium:
-        world.browser.get(django.django_url("/accounts/logout/?next=/"))
-        world.browser.get(django.django_url("accounts/login/?next=/"))
+        world.browser.get(
+            urljoin(django_url(step), "/accounts/logout/?next=/"))
+        world.browser.get(
+            urljoin(django_url(step), "/accounts/login/?next=/"))
 
         wait = ui.WebDriverWait(world.browser, 5)
         wait.until(visibility_of_element_located((By.ID, 'guest-login')))
@@ -156,7 +154,9 @@ def i_am_username_in_course(step, username, coursename):
 @step(u'I am not logged in')
 def i_am_not_logged_in(step):
     if world.using_selenium:
-        world.browser.get(django.django_url("/accounts/logout/?next=/"))
+        world.browser.get(
+            urljoin(
+                django_url(step), "/accounts/logout/?next=/"))
     else:
         world.client.logout()
 
@@ -164,10 +164,13 @@ def i_am_not_logged_in(step):
 @step(u'I log out')
 def i_log_out(step):
     if world.using_selenium:
-        world.browser.get(django.django_url("/accounts/logout/?next=/"))
+        world.browser.get(
+            urljoin(
+                django_url(step), "/accounts/logout/?next=/"))
     else:
         response = world.client.get(
-            django.django_url("/accounts/logout/?next=/"), follow=True)
+            urljoin(django_url(step), "/accounts/logout/?next=/"),
+            follow=True)
         world.response = response
         world.dom = html.fromstring(response.content)
 
@@ -181,19 +184,124 @@ def i_am_at_the_name_page(step, name):
 
 @step(u'there is a sample assignment')
 def there_is_a_sample_assignment(step):
-    os.system("./manage.py loaddata mediathread/main/fixtures/"
-              "sample_assignment.json "
-              "--settings=mediathread.settings_test > /dev/null")
-    time.sleep(2)
+    u = User.objects.get(username='test_instructor')
+    p = ProjectFactory(
+        body='<p>The Columbia Center for New Media Teaching and '
+        'Learning (CCNMTL) was founded at Columbia University in 1999 '
+        'to enhance teaching and learning through the purposeful use of '
+        'new media and technology. In partnership with faculty, the '
+        'Center supports efforts ranging from basic course website '
+        'management to advanced project development.&#160;<span '
+        'class="caps">CCNMTL&#160;</span>is committed to remaining a '
+        'leader in the field of new media teaching and learning, '
+        'engaging faculty, educators, librarians, partner institutions, '
+        'and the community in the reinvention of education for the '
+        'digital age.</p>\r\n<p>We are committed to ongoing evaluation '
+        'of the efficacy of our work within the '
+        'University.</p>\r\n<p>&#160;</p>\r\n<p>The Armory - Home to '
+        'CCNMTL\'s CUMC Office</p>\r\n<p><a class="materialCitation '
+        'asset-image asset-whole" '
+        'href="/asset/3/annotations/7/">Left '
+        'Corner</a></p>\r\n<p>&#160;</p>\r\n<p>Some of our '
+        'awards. Maurice &amp; Frank</p>\r\n<p><a '
+        'class="materialCitation asset-image asset-whole" '
+        'href="/asset/2/annotations/5/">Our esteemed '
+        'leaders</a></p>',
+        project_type='assignment',
+        author=u,
+        title='Sample Assignment',
+        modified='2012-05-26 15:11:25',
+        date_submitted='2012-05-26 15:11:25',
+        course=Course.objects.first(),
+        participants=[u]
+    )
+
+    policy = CollaborationPolicyRecord.objects.get(
+        policy_name='PublicEditorsAreOwners')
+    assignmenttype = ContentType.objects.get(
+        app_label='projects',
+        model='assignmentitem')
+    context = Collaboration.objects.filter(title='Sample Assignment').first()
+    CollaborationFactory(
+        group=None,
+        context=context,
+        title='Sample Assignment',
+        policy_record=policy,
+        object_pk=str(p.pk),
+        user=u,
+        content_type=assignmenttype,
+        slug=None)
+
+    coursetype = ContentType.objects.get(
+        app_label='courseaffils',
+        model='course')
+
+    try:
+        c = Collaboration.objects.get(
+            content_type=coursetype, object_pk=str(p.pk))
+        c.delete()
+    except Collaboration.DoesNotExist:
+        pass
+
+    CollaborationFactory(
+        group=Group.objects.first(),
+        context=None,
+        title='Sample Course',
+        policy_record=None,
+        object_pk=str(p.pk),
+        user=None,
+        content_type=coursetype,
+        slug='Sample_Course')
 
 
 @step(u'there is a sample response')
 def there_is_a_sample_response(step):
-    time.sleep(1)
-    os.system("./manage.py loaddata mediathread/main/fixtures/"
-              "sample_assignment_and_response.json "
-              "--settings=mediathread.settings_test > /dev/null")
-    time.sleep(2)
+    u = User.objects.get(username='test_student_one')
+    ProjectFactory(
+        body='<p>The Columbia Center for New Media Teaching and '
+        'Learning (CCNMTL) was founded at Columbia University in 1999 '
+        'to enhance teaching and learning through the purposeful use of '
+        'new media and technology. In partnership with faculty, the '
+        'Center supports efforts ranging from basic course website '
+        'management to advanced project development.&#160;<span '
+        'class="caps">CCNMTL&#160;</span>is committed to remaining a '
+        'leader in the field of new media teaching and learning, '
+        'engaging faculty, educators, librarians, partner institutions, '
+        'and the community in the reinvention of education for the '
+        'digital age.</p>\r\n<p>We are committed to ongoing evaluation '
+        'of the efficacy of our work within the '
+        'University.</p>\r\n<p>&#160;</p>\r\n<p>The Armory - Home to '
+        'CCNMTL\'s CUMC Office</p>\r\n<p><a class="materialCitation '
+        'asset-image asset-whole" '
+        'href="/asset/3/annotations/7/">Left '
+        'Corner</a></p>\r\n<p>&#160;</p>\r\n<p>Some of our '
+        'awards. Maurice &amp; Frank</p>\r\n<p><a '
+        'class="materialCitation asset-image asset-whole" '
+        'href="/asset/2/annotations/5/">Our esteemed '
+        'leaders</a></p>',
+        project_type='assignment',
+        author=u,
+        title='Sample Assignment',
+        modified='2012-05-26 15:11:25',
+        date_submitted='2012-05-26 15:11:25',
+        course=Course.objects.first(),
+        participant=[u]
+    )
+    ProjectFactory(
+        body='<p>The Columbia Center for New Teaching and Learning was '
+        '(CCNMTL)</p>\r\n<p>&#160;&#160;&#160;&#160;&#160;&#160;&#160; '
+        'was founded at Columbia University in 1999 to enhance teaching '
+        'and</p>\r\n<p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; '
+        'learning through the purposeful use of new media and '
+        'technology</p>',
+        title='Sample Assignment Response',
+        project_type='assignment',
+        author=u,
+        modified='2012-05-26 15:11:25',
+        date_submitted='2012-05-26 15:11:25',
+        course=Course.objects.first(),
+        participant=[u]
+    )
 
 
 @step(u'I type "([^"]*)" for ([^"]*)')
@@ -226,7 +334,8 @@ def there_is_not_a_text_link(step, text):
             if a.text:
                 if text.strip().lower() in a.text.strip().lower():
                     href = a.attrib['href']
-                    response = world.client.get(django.django_url(href))
+                    response = world.client.get(
+                        urljoin(django_url(step), href))
                     world.dom = html.fromstring(response.content)
                     assert False, "found the '%s' link" % text
     else:
@@ -244,7 +353,8 @@ def there_is_a_text_link(step, text):
             if a.text:
                 if text.strip().lower() in a.text.strip().lower():
                     href = a.attrib['href']
-                    response = world.client.get(django.django_url(href))
+                    response = world.client.get(
+                        urljoin(django_url(step), href))
                     world.dom = html.fromstring(response.content)
                     return
         assert False, "could not find the '%s' link" % text
@@ -265,7 +375,8 @@ def i_click_the_link(step, text):
             if a.text:
                 if text.strip().lower() in a.text.strip().lower():
                     href = a.attrib['href']
-                    response = world.client.get(django.django_url(href))
+                    response = world.client.get(
+                        urljoin(django_url(step), href))
                     world.dom = html.fromstring(response.content)
                     return
         assert False, "could not find the '%s' link" % text
@@ -912,7 +1023,8 @@ def i_clear_all_tags(step):
 @step(u'Given publish to world is ([^"]*)')
 def given_publish_to_world_is_value(step, value):
     if world.using_selenium:
-        world.browser.get(django.django_url("/dashboard/settings/"))
+        world.browser.get(
+            urljoin(django_url(step), "/dashboard/settings/"))
 
         if value == "enabled":
             elt = world.browser.find_element_by_id(
@@ -928,7 +1040,8 @@ def given_publish_to_world_is_value(step, value):
 
         if elt:
             elt.click()
-            world.browser.get(django.django_url("/"))
+            world.browser.get(
+                urljoin(django_url(step), "/"))
 
 
 @step(u'Then publish to world is ([^"]*)')
@@ -1140,7 +1253,6 @@ def there_is_a_status_title_project_by_author(step, status, title, author):
                     "span.metadata-value-composition")
                 assert type_elt.text.strip() == "COMPOSITION"
 
-            if not assignment:
                 # author
                 author_elt = e.find_element_by_css_selector(
                     "span.metadata-value-author")
@@ -1199,7 +1311,8 @@ def i_save_the_changes(step):
 @step(u'Given the selection visibility is set to "([^"]*)"')
 def given_the_selection_visibility_is_value(step, value):
     if world.using_selenium:
-        world.browser.get(django.django_url("/dashboard/settings/"))
+        world.browser.get(
+            urljoin(django_url(step), "/dashboard/settings/"))
 
         if value == "Yes":
             elt = world.browser.find_element_by_id("selection_visibility_yes")
@@ -1211,13 +1324,15 @@ def given_the_selection_visibility_is_value(step, value):
         elt = world.browser.find_element_by_id("selection_visibility_submit")
         if elt:
             elt.click()
-            world.browser.get(django.django_url("/"))
+            world.browser.get(
+                urljoin(django_url(step), "/"))
 
 
 @step(u'Given the item visibility is set to "([^"]*)"')
 def given_the_item_visibility_is_value(step, value):
     if world.using_selenium:
-        world.browser.get(django.django_url("/dashboard/settings/"))
+        world.browser.get(
+            urljoin(django_url(step), "/dashboard/settings/"))
 
         if value == "Yes":
             elt = world.browser.find_element_by_id("item_visibility_yes")
@@ -1231,7 +1346,7 @@ def given_the_item_visibility_is_value(step, value):
         elt = world.browser.find_element_by_id("selection_visibility_submit")
         if elt:
             elt.click()
-            world.browser.get(django.django_url("/"))
+            world.browser.get(urljoin(django_url(step), "/"))
 
 
 @step(u'I set the "([^"]*)" "([^"]*)" field to "([^"]*)"')
@@ -1385,25 +1500,25 @@ def find_button_by_value(value, parent=None):
         parent = world.browser
 
     elts = parent.find_elements_by_css_selector("input[type=submit]")
-    for e in elts:
-        if e.get_attribute("value") == value:
-            return e
+    a = [e for e in elts if e.get_attribute('value') == value]
+    if len(a) > 0:
+        return a[0]
 
     elts = parent.find_elements_by_css_selector("input[type=button]")
-    for e in elts:
-        if e.get_attribute("value") == value:
-            return e
+    a = [e for e in elts if e.get_attribute('value') == value]
+    if len(a) > 0:
+        return a[0]
 
     elts = world.browser.find_elements_by_tag_name("button")
-    for e in elts:
-        if e.text.strip() == value:
-            return e
+    a = [e for e in elts if e.text_strip() == value]
+    if len(a) > 0:
+        return a[0]
 
     # try the links too
     elts = parent.find_elements_by_tag_name("a")
-    for e in elts:
-        if e.text and e.text.strip() == value:
-            return e
+    a = [e for e in elts if e.text_strip() == value]
+    if len(a) > 0:
+        return a[0]
 
     return None
 

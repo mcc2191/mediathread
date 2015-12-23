@@ -65,6 +65,7 @@ INSTALLED_APPS += [  # noqa
     'reversion',
     'lti_auth',
     'bootstrap3',
+    'aloe_django',
 ]
 
 THUMBNAIL_SUBDIR = "thumbs"

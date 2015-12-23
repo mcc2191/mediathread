@@ -1,10 +1,10 @@
 Feature: Sources
 
     Scenario: manage_sources.feature 1. View Add to My Collection, Add Sources, Enable Upload 
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         
-        There is not an "Upload from Computer" feature
+        When There is not an "Upload from Computer" feature
         And I see 0 sources
         
         When I open the manage menu
@@ -26,16 +26,16 @@ Feature: Sources
         When I access the url "/asset/"
         Then I am at the Mediathread Collection page
         
-        The Collection panel has no "You Tube" item
+        When The Collection panel has no "You Tube" item
         And the Collection panel has a "MAAP Award Reception" item
         And the Collection panel has a "Mediathread: Introduction" item
         And the Collection panel has a "The Armory - Home to CCNMTL'S CUMC…" item
             
-        Finished using Selenium
+        Then Finished using Selenium
    
            
     Scenario: manage_sources.feature 2. Video Upload - Instructors Only
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given video upload is enabled
         
@@ -54,10 +54,10 @@ Feature: Sources
         Given the home workspace is loaded
         Then there is not an "Upload from Computer" feature
 
-        Finished using Selenium
+        Then Finished using Selenium
         
     Scenario: manage_sources.feature 3. Video Upload - Administrators Only 
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given video upload is enabled
         
@@ -84,10 +84,10 @@ Feature: Sources
         Given the home workspace is loaded
         Then there is not an "Upload from Computer" feature
         
-        Finished using Selenium
+        Then Finished using Selenium
         
     Scenario: manage_sources.feature 4. Video Upload - Students Too 
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given video upload is enabled
         
@@ -114,10 +114,10 @@ Feature: Sources
         Given the home workspace is loaded
         Then there is an "Upload from Computer" feature
 
-        Finished using Selenium
+        Then Finished using Selenium
         
     Scenario: manage_sources.feature 5. Video Upload - On Behalf Of Permissions
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given video upload is enabled
         
@@ -179,7 +179,7 @@ Feature: Sources
         And I cannot upload on behalf of other users
         
     Scenario: manage_sources.feature 6. Add & Remove External Source, verify navigation from Add to My Collection
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         
         When I open the manage menu
@@ -202,7 +202,7 @@ Feature: Sources
         Then I am at the YouTube page
         
     Scenario: manage_sources.feature 7. Remove External Source, verify navigation from Add to My Collection
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         
         When I open the manage menu
@@ -217,7 +217,7 @@ Feature: Sources
         
         # Under Add to My Collection
         When I click the "Sample Course" link
-        I see 1 source
+        Then I see 1 source
         
         #Remove
         When I open the manage menu
@@ -230,4 +230,4 @@ Feature: Sources
 
         # Under Add to My Collection
         When I click the "Sample Course" link
-        I see 0 source
+        Then I see 0 source

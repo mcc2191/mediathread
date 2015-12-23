@@ -1,7 +1,7 @@
 Feature: Taxonomy
 
     Scenario: taxonomy.feature 1. Create Taxonomy
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         When I open the manage menu
@@ -26,10 +26,10 @@ Feature: Taxonomy
         And I see "Terms"
         And I see "Type new term name here"
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: taxonomy.feature 2. Duplicate Taxonomy
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -50,10 +50,10 @@ Feature: Taxonomy
 
         I'm told "A Colors concept exists. Please choose another name"
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: taxonomy.feature 3. Delete Taxonomy
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -76,10 +76,10 @@ Feature: Taxonomy
 
         Then there is not a "Colors" link
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: taxonomy.feature 4. Edit Taxonomy
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -111,10 +111,10 @@ Feature: Taxonomy
         And I see "Terms"
         And I see "Type new term name here"
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: taxonomy.feature 5. Create Term
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -133,10 +133,10 @@ Feature: Taxonomy
         And create the term
         Then there is a "Red" term
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: taxonomy.feature 6. Duplicate Term
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -160,10 +160,10 @@ Feature: Taxonomy
         And create the term
         Then I'm told "Red term already exists. Please choose a new name"
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: taxonomy.feature 7. Delete Term
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -187,11 +187,11 @@ Feature: Taxonomy
         And I confirm the action
         Then there is no "Red" term
 
-        Finished using Selenium
+        Then Finished using Selenium
 
 
     Scenario: taxonomy.feature 8. Edit Term
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -219,10 +219,10 @@ Feature: Taxonomy
         Then there is a "Blue" term
         Then there is no "Red" term
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: taxonomy.feature 9. Create Term, Edit Taxonomy
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         
         # shortcut to taxonomy
@@ -260,7 +260,7 @@ Feature: Taxonomy
         And I see "Type new term name here"
         
     Scenario: taxonomy.feature 10. Create from onomy
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -291,10 +291,10 @@ Feature: Taxonomy
         Then there is a "Light Green" term
         Then there is a "Pink" term
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: taxonomy.feature 11. onomy delete and refresh
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -335,10 +335,10 @@ Feature: Taxonomy
         Then I click the Refresh button
         Then there is a "Red" term
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: taxonomy.feature 12. Try invalid Onomy url
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -363,10 +363,10 @@ Feature: Taxonomy
         Then there is no "Purple" term
         Then there is no "Red" term
 
-        Finished using Selenium
+        Then Finished using Selenium
 
     Scenario: taxonomy.feature 13. Refresh
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
 
         # shortcut to taxonomy
@@ -418,4 +418,4 @@ Feature: Taxonomy
         When I click the "Neons" link
         Then there is a "Laser Blue" term
         
-        Finished using Selenium
+        Then Finished using Selenium

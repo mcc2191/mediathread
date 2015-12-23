@@ -1,5 +1,5 @@
 ===========================================================
-   Lettuce
+   Aloe Testing
 ===========================================================
 
 --------------
@@ -9,7 +9,8 @@ RUNNING TESTS
 1. Required in path: sqlite3 and Firefox.
 2. ./manage.py harvest --settings=mediathread.settings_test --debug-mode
 
-More information here...http://lettuce.it/reference/cli.html
+More information here:
+https://aloe.readthedocs.org/projects/aloe-django/en/latest/harvest.html
 
 
 # Full run
@@ -35,7 +36,7 @@ Firefox: http://code.google.com/p/selenium/wiki/FirefoxDriver
 Chrome: http://code.google.com/p/selenium/wiki/ChromeDriver 
 
 -------------------------
-BASIC LETTUCE VOCABULARY
+BASIC GHERKIN VOCABULARY
 -------------------------
 
 * I am <username> in <coursename>

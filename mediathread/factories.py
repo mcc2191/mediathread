@@ -23,6 +23,7 @@ from structuredcollaboration.models import Collaboration, \
 class UserFactory(factory.DjangoModelFactory):
     class Meta:
         model = User
+        django_get_or_create = ('username',)
     username = factory.Sequence(lambda n: 'user%d' % n)
     password = factory.PostGenerationMethodCall('set_password', 'test')
 
@@ -42,8 +43,9 @@ class UserProfileFactory(factory.DjangoModelFactory):
 class GroupFactory(factory.DjangoModelFactory):
     class Meta:
         model = Group
+        django_get_or_create = ('name',)
     name = factory.Sequence(
-        lambda n: 't1.y2010.s001.cf1000.scnc.st.course:%d.columbia.edu' % n)
+        lambda n: 't1.y2010.s001.cf1000.scnc.st.course:%s.columbia.edu' % n)
 
 
 class RegistrationProfileFactory(factory.DjangoModelFactory):
@@ -56,6 +58,7 @@ class RegistrationProfileFactory(factory.DjangoModelFactory):
 class CourseFactory(factory.DjangoModelFactory):
     class Meta:
         model = Course
+        django_get_or_create = ('title',)
     title = "Sample Course"
     faculty_group = factory.SubFactory(GroupFactory)
     group = factory.SubFactory(GroupFactory)
@@ -156,6 +159,7 @@ class ProjectFactory(factory.DjangoModelFactory):
 class CollaborationFactory(factory.DjangoModelFactory):
     class Meta:
         model = Collaboration
+        django_get_or_create = ('content_type', 'object_pk')
     user = factory.SubFactory(UserFactory)
     group = factory.SubFactory(GroupFactory)
 
@@ -163,6 +167,7 @@ class CollaborationFactory(factory.DjangoModelFactory):
 class CollaborationPolicyRecordFactory(factory.DjangoModelFactory):
     class Meta:
         model = CollaborationPolicyRecord
+        django_get_or_create = ('policy_name',)
 
 
 class AssignmentItemFactory(factory.DjangoModelFactory):
@@ -285,3 +290,66 @@ class MediathreadTestMixin(object):
     def enable_upload(self, course):
         ExternalCollectionFactory.create(course=course,
                                          uploader=True)
+
+
+class MediathreadTestEnvFactory(object):
+    def __init__(self):
+        CollaborationPolicyRecordFactory(policy_name='PrivateEditorsAreOwners')
+        CollaborationPolicyRecordFactory(policy_name='PublicEditorsAreOwners')
+        CollaborationPolicyRecordFactory(
+            policy_name='PrivateStudentAndFaculty')
+        CollaborationPolicyRecordFactory(policy_name='CourseProtected')
+        CollaborationPolicyRecordFactory(policy_name='InstructorShared')
+        CollaborationPolicyRecordFactory(policy_name='InstructorManaged')
+        CollaborationPolicyRecordFactory(policy_name='CourseCollaboration')
+
+        c = CourseFactory()
+
+        u = UserFactory(username='selenium',
+                        password='test',
+                        email='selenium@ccnmtl.columbia.edu')
+
+        u = UserFactory(username='test_instructor',
+                        password='test')
+        u.groups.add(c.group)
+        u.groups.add(c.faculty_group)
+
+        u = UserFactory(username='test_student_one',
+                        first_name='Student',
+                        last_name='One',
+                        password='test')
+        u.groups.add(c.group)
+        u = UserFactory(username='test_student_two',
+                        first_name='Student',
+                        last_name='Two',
+                        password='test')
+        u.groups.add(c.group)
+        u = UserFactory(username='test_student_three',
+                        password='test')
+        u.groups.add(c.group)
+
+        c = CourseFactory()
+        u = UserFactory(username='test_instructor_alt',
+                        password='test')
+        u.groups.add(c.group)
+        u.groups.add(c.faculty_group)
+
+        u = UserFactory(username='test_student_alt',
+                        password='test')
+        u.groups.add(c.group)
+
+        u = UserFactory(username='test_staff',
+                        is_staff=True,
+                        password='test')
+        u.groups.add(c.group)
+
+        u = UserFactory(username='test_ta',
+                        first_name='Teacher\'s ',
+                        last_name='Assistant',
+                        password='test')
+        u.groups.add(c.group)
+
+        u = UserFactory(username='test_instructor_two',
+                        password='test')
+        u.groups.add(c.group)
+        u.groups.add(c.faculty_group)

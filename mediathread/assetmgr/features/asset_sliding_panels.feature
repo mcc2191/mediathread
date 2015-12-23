@@ -1,7 +1,7 @@
 Feature: Sliding Panels in the Asset View
     
     Scenario Outline: 1. Full Collection at various resolutions
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given my browser resolution is <width> x <height>
     
@@ -15,12 +15,12 @@ Feature: Sliding Panels in the Asset View
         And there is an open Asset panel
         
         # Verify the asset is really there
-        The item header is "MAAP Award Reception"
-        There is an "Item" link
-        There is a "Source" link
-        There is a "References" link
+        When The item header is "MAAP Award Reception"
+        Then There is an "Item" link
+        Then There is a "Source" link
+        Then There is a "References" link
         
-        Finished using Selenium
+        Then Finished using Selenium
         
       Examples:
         | width | height |
@@ -30,7 +30,7 @@ Feature: Sliding Panels in the Asset View
         | 1440  | 900    |
         
     Scenario Outline: 2. Individual Item View
-        Using selenium
+        Given Using selenium
         Given I am test_instructor in Sample Course
         Given my browser resolution is <width> x <height>
     
@@ -41,12 +41,12 @@ Feature: Sliding Panels in the Asset View
         And there is an open Asset panel
         
         # Verify the asset is really there
-        The item header is "MAAP Award Reception"
-        There is an "Item" link
-        There is a "Source" link
-        There is a "References" link
+        When The item header is "MAAP Award Reception"
+        Then There is an "Item" link
+        Then There is a "Source" link
+        Then There is a "References" link
         
-        Finished using Selenium
+        Then Finished using Selenium
         
       Examples:
         | width | height |
