@@ -4263,3 +4263,14 @@ a.btn.btn-default img.left {
 .sherd-vimeo-wrapper iframe {
     border: 0;
 }
+
+/* select2 customizations */
+.switcher-tool .select2-container--default,
+.switcher-tool .select2-container--default .select2-selection--multiple {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+select.course-tags {
+    width: 160px;
+}

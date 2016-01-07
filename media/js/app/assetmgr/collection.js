@@ -117,6 +117,7 @@ var CollectionList = function(config) {
 
     self.$el.on(
         'change select2-removed', 'select.vocabulary', function(evt) {
+            console.log(evt);
             var option = evt.added || evt.removed;
             var vocab = jQuery(option.element).parent().attr('data-id');
             if (!self.current_records.active_filters.hasOwnProperty(vocab)) {
