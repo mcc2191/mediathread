@@ -231,7 +231,7 @@ if (!Sherd.Image.FSIViewer) {
             obj.image_fpx_base = broken_url.slice(0, 3).join('/') + '/';
             obj.image_fpx_src = broken_url.slice(3).join('/');
             
-            var full_fpx_url = obj.fsiviewer +
+            var full_fpx_url = '/media/artstor/fsi.swf' +
                 '?FPXBase=' + obj.image_fpx_base +
                 '&amp;FPXSrc=' + obj.image_fpx_src +
                 '&amp;FPXWidth=' + fpx.width +

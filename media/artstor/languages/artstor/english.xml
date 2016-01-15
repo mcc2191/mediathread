@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data language="english" color="000000" font="_sans" offsetTop="0" offsetLeft="0" offsetWidth="0" offsetHeight="0">
+<tip id="ZoomOut"><b>Zoom Out</b></tip>
+<tip id="ZoomIn"><b>Zoom In</b></tip>
+<tip id="Downloading Data">Downloading:</tip>
+<tip id="Cancel">Cancel</tip>
+<tip id="Click ZoomIn"><b>Zoom In</b><br/>Click to zoom in</tip>
+<tip id="Up" txt="Move Up" />
+<tip id="SwitchUI"><b>Show/Hide User Interface</b><br/>Click to show or hide the user interface</tip>
+<tip id="ShowHide" txt="Show/Hide" />
+<tip id="Saturation" txt="Saturation" />
+<tip id="RotateRight"><b>Tilt Right</b><br/>Rotate image right around z-axis</tip>
+<tip id="RotateLeft"><b>Tilt Left</b><br/>Rotate image left around z-axis</tip>
+<tip id="Right" txt="Move Right" />
+<tip id="Reset"><b>Reset</b></tip>
+<tip id="PreviousSceneSet" txt="Rotate Down" />
+<tip id="PreviousScene" txt="Rotate Right" />
+<tip id="NextSceneSet" txt="Rotate Up" />
+<tip id="NextScene" txt="Rotate Left" />
+<tip id="Navigator"><b>Move Selection</b><br/>Click &amp; drag to move selection</tip>
+<tip id="Drag Window"><b>Move Window</b><br/>Click &amp; drag to reposition<br/>the survey window.</tip>
+<tip id="MouseModeSelect"><b>Mouse Mode</b><br/>Click to select mouse mode</tip>
+<tip id="Mode3"><b>Rotate Mode</b></tip>
+<tip id="Mode2"><b>Rotate 3D</b><br/>Use CTRL to Reset Rotation</tip>
+<tip id="Mode1"><b>Pan Mode</b></tip>
+<tip id="Mode0"><b>Zoom Mode</b></tip>
+<tip id="Mode" txt="" />
+<tip id="loading" txt="...loading data..." />
+<tip id="loaded" txt="loaded" />
+<tip id="Left" txt="Move Left" />
+<tip id="Instructions" txt="Show Operating Instructions" />
+<tip id="FSIInfo" txt="Show Viewer Information" />
+<tip id="Drag to Resize" txt="Click &amp; drag to resize" />
+<tip id="Down" txt="Move Down" />
+<tip id="CNT" txt="Contrast" />
+<tip id="Close" txt="Close" />
+<tip id="ClickAndDrag"><b>Click &amp; Drag</b><br/>Click &amp; drag to re<tip id="No Search Matches">Your search for "<b>%%keywords%%</b>" did not return any matches.</tip>
+position.</tip>
+<tip id="Brightness" txt="Brightness" />
+<tip id="InfoReadMore"><b>Show Viewer Information</b><br/>Read more on FSI Viewer<br/>at www.fsi-viewer.com</tip>
+<tip id="InfoHelp"><b>Instructions</b><br/>How to use FSI Viewer.</tip>
+
+<!-- Pages Add-on -->
+<tip id="Show / Hide Page Index"><b>Page Index</b><br/>Show / Hide Page Index</tip>
+<tip id="Show Specified Page"><b>Go to specified page</b><br/>Go to page number you entered.</tip>
+<tip id="Select Page"><b>Select Page</b><br/>Drag left or right to select a page</tip> 
+<tip id="Go to page [n]"><b>Click to Select</b><br/>Go to Page [n]</tip>
+<tip id="Exit Zoom" txt="Exit Zoom" />
+<tip id="Previous Page"><b>Previous Page</b><br/>Go to previous page</tip>
+<tip id="First Page"><b>First Page</b><br/>Go to first page</tip>
+<tip id="Last Page"><b>Last Page</b><br/>Go to last page</tip>
+<tip id="Next Page"><b>Next Page</b><br/>Go to next page</tip>
+<tip id="PagesPrintDialogTitle">Print Page(s)</tip>
+<tip id="PagesPrintDialogText">Please choose the image to print from the options below and click '<b><i>Print</i></b>' button to start printing.</tip>
+<tip id="PagesPrintButton">Print</tip>
+<tip id="PagesSearchDialogTitle">Search Page(s)</tip>
+<tip id="PagesSearchDialogText">Please enter one or more keywords to search for and click "Search" below.<br/><b>Example:</b> +shirt +women</tip>
+<tip id="PagesSearchButton">Search</tip>
+<tip id="PagesSaveDialogTitle">Save Page(s)</tip>
+<tip id="PagesSaveDialogText">Please choose the file to download from the options below and click '<b><i>Download</i></b>' button to start downloading.</tip>
+<tip id="PagesSaveButton">Download</tip>
+<tip id="Both Pages">Both Pages</tip>
+<tip id="Left Page">Left Page</tip>
+<tip id="Entire Document">Entire Document</tip>
+<tip id="Right Page">Right Page</tip>
+<tip id="Click Page to Zoom"><b>Click to Zoom</b><br/>Click the left or right page to zoom in</tip>
+<tip id="Print Page"><b>Print Page</b></tip>
+<tip id="Download Page"><b>Download Page</b></tip>
+<tip id="Current View">Current View</tip>
+<tip id="Chapter">Chapter</tip>
+<tip id="Page">Page</tip>
+<tip id="Image">Image</tip>
+<tip id="Save Page"><b>Save</b><br/>Open or close download dialog</tip>
+<tip id="Print Page"><b>Print</b><br/>Open or close print dialog</tip>
+<tip id="Search Pages"><b>Search</b><br/>Open or close search dialog</tip>
+<tip id="Searching">Searching for <b>%%keywords%%</b>...please wait</tip>
+<tip id="No Search Matches">Your search for <font color="#ff0000"><b>%%keywords%%</b></font> did not return any matches.</tip>
+
+<!-- Showcase Add-on -->
+<tip id="SCSplitMax"><b>Maximize</b><br/>Maximaze thumbnails bar</tip>
+<tip id="SCSplitMin"><b>Minimize</b><br/>Minimize thumbnails bar</tip>
+<tip id="SCZoomIn" txt="Larger Thumbnails" />
+<tip id="SCZoomOut" txt="Smaller Thumbnails" />
+
+
+<!-- Plug-in NotePad -->
+<tip id="Show Notepad"><b>Notepad</b><br/>Show or hide your bookmarks.</tip>
+<tip id="NotepadTitle"><b>Your Bookmarks</b></tip>
+<tip id="NotepadAddorDelete">Add or delete bookmarks</tip>
+<tip id="NotepadAddFullBookmark">Bookmark this page </tip>
+<tip id="NotepadAddLinkBookmark">Bookmark a link</tip>
+<tip id="NotepadAddCustomBookmark">Bookmark custom area</tip>
+<tip id="NotepadGotoBookmark">Go to bookmark...</tip>
+<tip id="NotepadDelete">Delete this bookmark...</tip>
+<tip id="NotepadOpenLink">Open link of this bookmark...</tip>
+<tip id="NotepadSend">Send bookmarks by email...</tip>
+<tip id="NotepadDeleteAll">Delete all bookmarks</tip>
+<tip id="NotepadEditNote">Click here edit comment....</tip>
+<tip id="NotepadPage">Page</tip>
+<tip id="NotepadImage">Image</tip>
+<tip id="NotepadMainHelp"><br/><p align="center"><br/><b>There are currently no bookmarks.<br/><br/>Click one of the bookmark buttons to add a bookmark.<br/><br/>Your bookmarks will be stored on your computer and will be available on your next visit.</b></p></tip>
+<tip id="NotepadBookmarkLinkHelp"><br/><b>- Click the link you want to bookmark now.<br/><br/>- Click anywhere else to cancel.</b></tip>
+<tip id="NotepadBookmarkCustomHelp"><br/><b>- Click and drag to mark the an area you want to bookmark.<br/><br/>- Click any where else to cancel.</b></tip>
+
+	
+
+<!-- Plug-in SelectFrame -->
+<tip id="SelectFrame"><b>Select Frame<br/></b>Show / Hide the select frame</tip>
+<tip id="Move Selection"><b>Move Selection</b><br/>Click &amp; drag to move select frame.</tip>
+<tip id="Resize Selection"><b>Resize Selection</b><br/>Use Shift and Ctrl to switch resize mode.</tip>
+
+<!-- More Plugins -->
+<tip id="Magnifier"><b>Magnifier Tool</b><br/>Show / hide magnifier tool</tip>
+<tip id="SwitchMusic"><b>Sound</b><br/>Switch sound on or off</tip>
+<tip id="MaxZoom"><b>Maximum Magnification</b><br/>Click to zoom to max. magnification</tip>
+<tip id="ImageAdjust" txt="Adjust Colors" />
+<tip id="Hotspots"><b>Hot Spots</b><br/>Show or hide hot spots on image</tip>
+<tip id="HistoryForward"><b>History Forward</b><br/>Show previous image section</tip>
+<tip id="HistoryBack"><b>History Back</b><br/>Show next image section</tip>
+<tip id="Measure">Mouse Mode <b>Measure</b><br/>Click &amp; drag on image to measure</tip>
+<tip id="ExtendedNavigation"><b>Show/Hide Extended Navigation</b><br/>Show or hide the dragable navigation panel.</tip>
+
+</data>
