@@ -83,45 +83,6 @@ all_archives = [
              },
      },
      },
-    {'title': 'Vanderbilt Television News Archive',
-     'metadata': {
-         'description': ("This archive has been recording, preserving and "
-                         "providing access to television news broadcasts of "
-                         "the national networks since August 5, 1968. NBC "
-                         "footage in the archive is viewable online."
-                         ""
-                         "INSTRUCTIONS"
-                         "Online video is in RealMedia format. If you are "
-                         "unable to view it, install the plugin from "
-                         "http://www.real.com/"
-                         ""
-                         "Find an online video in the database (indicated "
-                         "by a camera icon), and click the 'view video' "
-                         "button.  A window will pop up and the video "
-                         "will play; click on the video's 'permalink' "
-                         "to open it in your main browser window and "
-                         "close the pop-up."
-                         ""
-                         "Then click the Analyze w/Mediathread bookmarklet "
-                         "in your browser to bring the video into Mediathread."
-                         "  You will be given the option at this point to "
-                         "give the video a descriptive title."),
-         'required': ['realplayer'],
-         },
-     'sources': {
-         'url': {'label': 'url',
-                 'url': 'http://tvnews.vanderbilt.edu/',
-                 },
-         'archive': {'label': 'archive',
-                     'url': 'http://tvnews.vanderbilt.edu/',
-                     },
-         'thumb': {
-             'label': 'thumb',
-             'url': ("http://tvnews.vanderbilt.edu.ezproxy.cul."
-                     "columbia.edu/images/vcrest.gif"),
-             },
-     },
-     },
     {'title': 'The Tibetan & Himalayan Library',
      'metadata': {
          'description': ("Includes murals from the Meru Nyingpa (rme ru "

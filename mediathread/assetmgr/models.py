@@ -136,7 +136,7 @@ class Asset(models.Model):
     # 'url' should probably stay at the end
     primary_labels = ('flv', 'flv_pseudo', 'flv_rtmp',
                       'mp4', 'mp4_pseudo', 'mp4_rtmp',
-                      'youtube', 'quicktime', 'realplayer',
+                      'youtube', 'quicktime',
                       'ogg', 'vimeo', 'kaltura',
                       'video_pseudo', 'video_rtmp', 'video',
                       'mp3', 'mp4_audio',

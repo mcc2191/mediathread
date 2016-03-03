@@ -60,10 +60,6 @@ if (!Sherd.GenericAssetView) {
                 var jwplayer = this.settings.jwplayer = {'view': new Sherd.Video.JWPlayer() };
                 decorateVideo(options, jwplayer);
             }
-            if (Sherd.Video.RealPlayer) {
-                var realplayer = this.settings.realplayer = {'view': new Sherd.Video.RealPlayer() };
-                decorateVideo(options, realplayer);
-            }
             if (Sherd.Video.Videotag) {
                 var videotag = this.settings.videotag = {'view': new Sherd.Video.Videotag() };
                 decorateVideo(options, videotag);

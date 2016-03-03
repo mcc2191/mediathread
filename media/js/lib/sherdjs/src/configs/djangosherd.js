@@ -78,8 +78,6 @@ function djangosherd_adaptAsset(asset) {
         }
         asset.url = asset.quicktime;  //TODO remove this and make sure quicktime.js uses .quicktime
         asset.loadingposter = '/media/js/sherdjs/media/images/poster.gif';
-    } else if (asset.realplayer) {
-        asset.type = 'realplayer';
     } else if (asset.ogg) {
         asset.type = 'videotag';
     } else if (asset.image) {
