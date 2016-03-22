@@ -8,6 +8,7 @@ from django.contrib.auth.views import (password_change, password_change_done,
                                        password_reset_complete,
                                        password_reset_confirm)
 from django.views.generic.base import TemplateView
+from courseaffils.views import CourseCreateView
 from registration.backends.default.views import RegistrationView
 from tastypie.api import Api
 
@@ -128,9 +129,11 @@ urlpatterns = patterns(
     (r'^contact/success/$',
      TemplateView.as_view(template_name='main/contact_success.html')),
     (r'^contact/$', ContactUsView.as_view()),
+
     (r'^course/request/success/$',
      TemplateView.as_view(template_name='main/course_request_success.html')),
     (r'^course/request/', RequestCourseView.as_view()),
+    url(r'^course/create/', CourseCreateView.as_view(), name='course_create'),
 
     # Bookmarklet
     url(r'^accounts/logged_in.js$', IsLoggedInView.as_view(), {},

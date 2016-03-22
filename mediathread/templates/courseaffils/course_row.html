@@ -14,7 +14,7 @@
     {% if add_privilege %}
         <td class="manage-course">
             <a class="project"
-               href="{%url 'admin:courseaffils_course_change' course.id %}"
+               href="{% url 'admin:courseaffils_course_change' course.id %}"
             >manage</a>
         </td>
     {% endif %}
