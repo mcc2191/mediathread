@@ -24,7 +24,7 @@ from mediathread.discussions.utils import pretty_date
 from mediathread.djangosherd.api import SherdNoteResource
 from mediathread.djangosherd.models import DiscussionIndex
 from mediathread.mixins import faculty_only, LoggedInMixin, \
-    LoggedInFacultyMixin
+    LoggedInFacultyCourseMixin
 from mediathread.taxonomy.api import VocabularyResource
 from mediathread.taxonomy.models import Vocabulary
 from structuredcollaboration.models import Collaboration
@@ -119,7 +119,7 @@ def discussion_create(request):
                             content_type='application/json')
 
 
-class DiscussionDeleteView(LoggedInFacultyMixin, View):
+class DiscussionDeleteView(LoggedInFacultyCourseMixin, View):
     def post(self, request, discussion_id):
         root_comment = get_object_or_404(ThreadedComment, pk=discussion_id)
 

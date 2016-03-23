@@ -5,7 +5,9 @@ from django.test.testcases import TestCase
 
 from courseaffils.models import Course
 from mediathread.api import UserResource
-from mediathread.factories import (UserFactory, GroupFactory, CourseFactory)
+from mediathread.main.tests.factories import (
+    UserFactory, GroupFactory, CourseFactory
+)
 
 
 class UserApiTest(TestCase):

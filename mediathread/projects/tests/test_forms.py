@@ -1,7 +1,9 @@
 from django.test.client import RequestFactory
 from django.test.testcases import TestCase
 
-from mediathread.factories import MediathreadTestMixin, ProjectFactory
+from mediathread.main.tests.factories import (
+    MediathreadTestMixin, ProjectFactory
+)
 from mediathread.main.course_details import ALLOW_PUBLIC_COMPOSITIONS_KEY, \
     SELECTION_VISIBILITY_KEY
 from mediathread.projects.forms import ProjectForm

@@ -7,9 +7,11 @@ from django.test.client import RequestFactory
 from django.test.testcases import TestCase
 
 from mediathread.djangosherd.models import SherdNote
-from mediathread.factories import MediathreadTestMixin, ProjectFactory, \
-    UserFactory, AssetFactory, SherdNoteFactory, RegistrationProfileFactory, \
+from mediathread.main.tests.factories import (
+    MediathreadTestMixin, ProjectFactory,
+    UserFactory, AssetFactory, SherdNoteFactory, RegistrationProfileFactory,
     UserProfileFactory
+)
 from mediathread.reports.views import AssignmentDetailReport
 from mediathread.taxonomy.models import Term
 

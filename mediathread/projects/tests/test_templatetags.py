@@ -2,7 +2,9 @@ from django.template.base import Template
 from django.template.context import Context
 from django.test.testcases import TestCase
 
-from mediathread.factories import UserFactory, MediathreadTestMixin
+from mediathread.main.tests.factories import (
+    UserFactory, MediathreadTestMixin
+)
 
 
 class TestTemplateTags(MediathreadTestMixin, TestCase):

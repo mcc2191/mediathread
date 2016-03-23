@@ -23,7 +23,7 @@ from mediathread.discussions.views import threaded_comment_json
 from mediathread.djangosherd.models import SherdNote, DiscussionIndex
 from mediathread.mixins import (
     LoggedInMixin, RestrictedMaterialsMixin, AjaxRequiredMixin,
-    JSONResponseMixin, LoggedInFacultyMixin, ProjectReadableMixin,
+    JSONResponseMixin, LoggedInFacultyCourseMixin, ProjectReadableMixin,
     ProjectEditableMixin, CreateReversionMixin)
 from mediathread.projects.api import ProjectResource
 from mediathread.projects.forms import ProjectForm
@@ -167,7 +167,9 @@ class ProjectDeleteView(LoggedInMixin, ProjectEditableMixin, View):
         return HttpResponseRedirect('/')
 
 
-class UnsubmitResponseView(LoggedInFacultyMixin, CreateReversionMixin, View):
+class UnsubmitResponseView(LoggedInFacultyCourseMixin,
+                           CreateReversionMixin,
+                           View):
 
     def post(self, request, *args, **kwargs):
         project_id = request.POST.get('student-response', None)
@@ -634,7 +636,7 @@ class ProjectCollectionView(LoggedInMixin, RestrictedMaterialsMixin,
         return self.render_to_json_response(ctx)
 
 
-class ProjectSortView(LoggedInFacultyMixin, AjaxRequiredMixin,
+class ProjectSortView(LoggedInFacultyCourseMixin, AjaxRequiredMixin,
                       JSONResponseMixin, CreateReversionMixin, View):
     '''
     An ajax-only request to update project ordinality. Used by instructors
@@ -651,7 +653,7 @@ class ProjectSortView(LoggedInFacultyMixin, AjaxRequiredMixin,
         return self.render_to_json_response({'sorted': 'true'})
 
 
-class SelectionAssignmentEditView(LoggedInFacultyMixin, TemplateView):
+class SelectionAssignmentEditView(LoggedInFacultyCourseMixin, TemplateView):
     template_name = 'projects/selection_assignment_edit.html'
 
     def get(self, *args, **kwargs):

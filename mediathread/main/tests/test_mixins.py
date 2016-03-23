@@ -3,8 +3,10 @@ from django.test.client import RequestFactory
 from django.test.testcases import TestCase
 
 from mediathread.assetmgr.models import Asset
-from mediathread.factories import MediathreadTestMixin, ProjectFactory, \
+from mediathread.main.tests.factories import (
+    MediathreadTestMixin, ProjectFactory,
     AssetFactory, AssignmentItemFactory, SherdNoteFactory, ProjectNoteFactory
+)
 from mediathread.mixins import RestrictedMaterialsMixin
 from mediathread.projects.models import RESPONSE_VIEW_NEVER, \
     RESPONSE_VIEW_SUBMITTED

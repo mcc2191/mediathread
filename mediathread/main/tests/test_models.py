@@ -1,8 +1,10 @@
 from django.test.client import RequestFactory
 from django.test.testcases import TestCase
 
-from mediathread.factories import MediathreadTestMixin, \
+from mediathread.main.tests.factories import (
+    MediathreadTestMixin,
     UserFactory, UserProfileFactory, CourseFactory
+)
 from mediathread.main.models import UserSetting, user_registered_callback, \
     user_activated_callback
 

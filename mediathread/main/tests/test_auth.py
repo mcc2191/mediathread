@@ -1,6 +1,6 @@
 from django.test.testcases import TestCase
 
-from mediathread.factories import UserFactory, CourseFactory
+from mediathread.main.tests.factories import UserFactory, CourseFactory
 from mediathread.main.auth import CourseGroupMapper
 
 

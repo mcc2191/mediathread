@@ -1,7 +1,7 @@
 from django.test.client import RequestFactory
 from django.test.testcases import TestCase
 
-from mediathread.factories import UserFactory
+from mediathread.main.tests.factories import UserFactory
 from mediathread.main.forms import ContactUsForm, RequestCourseForm, \
     CourseDeleteMaterialsForm
 

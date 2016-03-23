@@ -9,7 +9,9 @@ from django.test.testcases import TestCase
 from mediathread.discussions.utils import get_course_discussions
 from mediathread.discussions.views import \
     discussion_create, DiscussionView
-from mediathread.factories import MediathreadTestMixin, ProjectFactory
+from mediathread.main.tests.factories import (
+    MediathreadTestMixin, ProjectFactory
+)
 from structuredcollaboration.models import Collaboration
 
 

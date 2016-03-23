@@ -5,8 +5,10 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from mediathread.djangosherd.models import SherdNote
-from mediathread.factories import MediathreadTestMixin, \
+from mediathread.main.tests.factories import (
+    MediathreadTestMixin,
     AssetFactory, SherdNoteFactory, ProjectFactory, AssignmentItemFactory
+)
 from mediathread.projects.models import Project, RESPONSE_VIEW_NEVER, \
     RESPONSE_VIEW_SUBMITTED, RESPONSE_VIEW_ALWAYS, AssignmentItem
 

@@ -16,9 +16,10 @@ from threadedcomments.models import ThreadedComment
 from mediathread.assetmgr.models import Asset
 from mediathread.discussions.utils import get_course_discussions
 from mediathread.djangosherd.models import SherdNote
-from mediathread.factories import (
+from mediathread.main.tests.factories import (
     UserFactory, UserProfileFactory, MediathreadTestMixin,
-    AssetFactory, ProjectFactory, SherdNoteFactory)
+    AssetFactory, ProjectFactory, SherdNoteFactory
+)
 from mediathread.main import course_details
 from mediathread.main.course_details import allow_public_compositions, \
     course_information_title, all_items_are_visible, all_selections_are_visible

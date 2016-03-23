@@ -4,8 +4,10 @@ import json
 
 from django.test import TestCase
 
-from mediathread.factories import MediathreadTestMixin, UserFactory, \
+from mediathread.main.tests.factories import (
+    MediathreadTestMixin, UserFactory,
     AssetFactory, SherdNoteFactory, ProjectFactory
+)
 
 
 class HomepageTest(MediathreadTestMixin, TestCase):

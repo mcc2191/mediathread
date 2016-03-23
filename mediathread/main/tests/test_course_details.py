@@ -1,6 +1,8 @@
 from django.test.testcases import TestCase
 
-from mediathread.factories import MediathreadTestMixin, UserFactory
+from mediathread.main.tests.factories import (
+    MediathreadTestMixin, UserFactory
+)
 from mediathread.main.course_details import can_upload, \
     UPLOAD_PERMISSION_KEY, UPLOAD_PERMISSION_ADMINISTRATOR, \
     UPLOAD_PERMISSION_STUDENT, \

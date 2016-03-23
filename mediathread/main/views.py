@@ -35,9 +35,12 @@ from mediathread.main.course_details import cached_course_is_faculty, \
 from mediathread.main.forms import RequestCourseForm, ContactUsForm, \
     CourseDeleteMaterialsForm
 from mediathread.main.models import UserSetting
-from mediathread.mixins import ajax_required, \
-    AjaxRequiredMixin, JSONResponseMixin, LoggedInFacultyMixin, \
+from mediathread.mixins import (
+    ajax_required,
+    AjaxRequiredMixin, JSONResponseMixin,
+    LoggedInFacultyMixin, LoggedInFacultyCourseMixin,
     LoggedInSuperuserMixin
+)
 from mediathread.projects.api import ProjectResource
 from mediathread.projects.models import Project
 from structuredcollaboration.models import Collaboration
@@ -61,8 +64,8 @@ def django_settings(request):
             'EXPERIMENTAL': 'experimental' in request.COOKIES}
 
 
-@rendered_with('homepage.html')
-def triple_homepage(request):
+@rendered_with('coursepage.html')
+def coursepage(request):
     if not request.course:
         return HttpResponseRedirect('/accounts/login/')
 
@@ -110,7 +113,7 @@ def triple_homepage(request):
     return context
 
 
-class CourseManageSourcesView(LoggedInFacultyMixin, TemplateView):
+class CourseManageSourcesView(LoggedInFacultyCourseMixin, TemplateView):
     template_name = 'dashboard/class_manage_sources.html'
 
     def get_context_data(self, **kwargs):
@@ -143,7 +146,7 @@ class CourseManageSourcesView(LoggedInFacultyMixin, TemplateView):
         return HttpResponseRedirect(reverse("class-manage-sources"))
 
 
-class CourseSettingsView(LoggedInFacultyMixin, TemplateView):
+class CourseSettingsView(LoggedInFacultyCourseMixin, TemplateView):
     template_name = 'dashboard/class_settings.html'
 
     def get_context_data(self, **kwargs):
@@ -224,7 +227,7 @@ def set_user_setting(request, user_name):
     return HttpResponse(json_stream, content_type='application/json')
 
 
-class MigrateCourseView(LoggedInFacultyMixin, TemplateView):
+class MigrateCourseView(LoggedInFacultyCourseMixin, TemplateView):
 
     template_name = 'dashboard/class_migrate.html'
 
@@ -297,7 +300,7 @@ class MigrateCourseView(LoggedInFacultyMixin, TemplateView):
         return HttpResponse(json_stream, content_type='application/json')
 
 
-class MigrateMaterialsView(LoggedInFacultyMixin, AjaxRequiredMixin,
+class MigrateMaterialsView(LoggedInFacultyCourseMixin, AjaxRequiredMixin,
                            JSONResponseMixin, View):
     """
     An ajax-only request to retrieve course information & materials
@@ -526,7 +529,7 @@ class CourseDeleteMaterialsView(LoggedInSuperuserMixin, FormView):
         return kwargs
 
 
-class CourseRosterView(LoggedInFacultyMixin, ListView):
+class CourseRosterView(LoggedInFacultyCourseMixin, ListView):
     model = User
     template_name = 'dashboard/class_roster.html'
 
@@ -534,7 +537,7 @@ class CourseRosterView(LoggedInFacultyMixin, ListView):
         return self.request.course.members
 
 
-class CoursePromoteUserView(LoggedInFacultyMixin, View):
+class CoursePromoteUserView(LoggedInFacultyCourseMixin, View):
 
     def post(self, request):
         student_id = request.POST.get('student_id', None)
@@ -547,7 +550,7 @@ class CoursePromoteUserView(LoggedInFacultyMixin, View):
         return HttpResponseRedirect(reverse('course-roster'))
 
 
-class CourseDemoteUserView(LoggedInFacultyMixin, View):
+class CourseDemoteUserView(LoggedInFacultyCourseMixin, View):
 
     def post(self, request):
         faculty_id = request.POST.get('faculty_id', None)
@@ -560,7 +563,7 @@ class CourseDemoteUserView(LoggedInFacultyMixin, View):
         return HttpResponseRedirect(reverse('course-roster'))
 
 
-class CourseRemoveUserView(LoggedInFacultyMixin, View):
+class CourseRemoveUserView(LoggedInFacultyCourseMixin, View):
 
     def post(self, request):
         user_id = request.POST.get('user_id', None)
@@ -578,7 +581,7 @@ class CourseRemoveUserView(LoggedInFacultyMixin, View):
         return HttpResponseRedirect(reverse('course-roster'))
 
 
-class CourseAddUNIUserView(LoggedInFacultyMixin, View):
+class CourseAddUNIUserView(LoggedInFacultyCourseMixin, View):
 
     def get_or_create_user(self, uni):
         try:
@@ -634,3 +637,7 @@ class CourseAddUNIUserView(LoggedInFacultyMixin, View):
                     self.notify_user(uni)
 
         return HttpResponseRedirect(reverse('course-roster'))
+
+
+class HomepageView(LoggedInFacultyMixin, TemplateView):
+    template_name = 'main/homepage.html'

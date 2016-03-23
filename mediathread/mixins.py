@@ -1,7 +1,7 @@
 import csv
 import json
 
-from courseaffils.lib import in_course_or_404
+from courseaffils.lib import in_course_or_404, faculty_courses_for_user
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.db import transaction
@@ -175,11 +175,22 @@ class LoggedInMixin(object):
 class LoggedInFacultyMixin(object):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        if not faculty_courses_for_user(self.request.user).exists():
+            return HttpResponseForbidden("forbidden")
+
+        return super(LoggedInFacultyMixin, self).dispatch(
+            *args, **kwargs)
+
+
+class LoggedInFacultyCourseMixin(object):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
         if not cached_course_is_faculty(self.request.course,
                                         self.request.user):
             return HttpResponseForbidden("forbidden")
 
-        return super(LoggedInFacultyMixin, self).dispatch(*args, **kwargs)
+        return super(LoggedInFacultyCourseMixin, self).dispatch(
+            *args, **kwargs)
 
 
 class LoggedInSuperuserMixin(object):
