@@ -15,8 +15,8 @@ DATABASES = {
     }
 }
 
-BROWSER = 'Headless'
-# BROWSER = 'Firefox'
+# BROWSER = 'Headless'
+BROWSER = 'Firefox'
 # BROWSER = 'Chrome'
 
 LETTUCE_SERVER_PORT = 8002
